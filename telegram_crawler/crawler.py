@@ -10,7 +10,7 @@ import sys, traceback
 import asyncio
 
 # params
-MAX_MSG_COUNT = 100
+MAX_MSG_COUNT = 200
 
 
 class Crawler:
@@ -32,13 +32,13 @@ class Crawler:
         for message in self.client.iter_messages(self.dialog, limit=None):
             if i >= MAX_MSG_COUNT:
                 break
+            i += 1
             if message.message is None or len(message.message) == 0:
                 continue
             message_id = message.id
             body = message.message
             from_id = message.from_id
             if from_id == self.targetId:
-                i += 1
                 messages_text.append(body)
             fwd_from = message.fwd_from
             if fwd_from is not None:

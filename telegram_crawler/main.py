@@ -1,5 +1,5 @@
 from crawler import Crawler
-from loader import Connector
+from connector import Connector
 from loader import ConfigLoader
 import asyncio
 
@@ -9,12 +9,12 @@ async def get_dialogs(connector):
 
 
 def extract_dialogs_from_telegram_server():
-    # params
-    target_identifier = '-'
-    candidate_dialog_names = ['-']
-    max_dialog_count = 20  # if candidate_dialog_names is empty
+    config = ConfigLoader.get_config()
 
-    c = Connector()
+    c = Connector(config['api_id'], config['api_hash'], config['phone_number'])
+    candidate_dialog_names = config['candidate_dialog_names']
+    max_dialog_count = config['max_dialog_count']
+    target_identifier = config['target_identifier']
 
     dialogs = asyncio.get_event_loop().run_until_complete(get_dialogs(c))
 
