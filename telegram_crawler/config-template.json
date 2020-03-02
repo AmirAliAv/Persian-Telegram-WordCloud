@@ -2,8 +2,5 @@
 	"api_id": 12345,
 	"api_hash": "<api_hash>",
 	"phone_number": "<phone_number>",
-	"session_name": "<session_name>",
-	"db_name": "<db_name>",
-	"group_links": "<group_links>",
-	"database": "<db_name.sqlite3>"
+	"session_name": "<session_name>"
 }
