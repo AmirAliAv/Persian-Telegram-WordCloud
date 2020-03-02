@@ -1,3 +1,5 @@
+#persian_wordcloud
+
 arabic-reshaper==2.0.15
 certifi==2019.11.28
 chardet==3.0.4
@@ -21,3 +23,13 @@ six==1.14.0
 urllib3==1.25.8
 wordcloud==1.6.0
 wordcloud-fa==0.1.5
+
+#telegram_crawler
+
+pyaes
+rsa
+typing
+cryptg
+pysocks
+hachoir
+telethon
