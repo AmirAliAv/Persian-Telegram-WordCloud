@@ -330,6 +330,7 @@ tags
 *.sqlite
 *.sqlite3
 *.session
+*.session-journal
 ../config.json
 media/*
 groups.csv

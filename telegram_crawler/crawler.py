@@ -1,5 +1,5 @@
 from telethon import TelegramClient
-from telethon.tl.types import Dialog, MessageService, MessageMediaDocument, InputMessagesFilterVoice
+from telethon.tl.types import Dialog
 import asyncio
 
 
@@ -8,7 +8,10 @@ class Crawler:
         super().__init__()
         self.dialog = dialog
         self.client = client
-        self.targetId = self.get_user_entity(target_identifier).id
+        if len(target_identifier) == 0:
+            self.targetId = -1
+        else:
+            self.targetId = self.get_user_entity(target_identifier).id
         self.max_messages_count = max_messages_count
 
     def get_user_entity(self, identifier):
@@ -29,7 +32,7 @@ class Crawler:
             message_id = message.id
             body = message.message
             from_id = message.from_id
-            if from_id == self.targetId:
+            if self.targetId == -1 or from_id == self.targetId:
                 messages_text.append(body)
             fwd_from = message.fwd_from
             if fwd_from is not None:

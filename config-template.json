@@ -2,8 +2,13 @@
 	"api_id": 12345,
 	"api_hash": "<api_hash>",
 	"phone_number": "<phone_number>",
-	"target_identifier": "<phone_number or username or @username>",
-	"candidate_dialog_names": ["<dialog name>"],
+
+	"dialogs_name": ["<dialog name>"],
+	"target_identifier": "<phone_number> | @<username> | me | ",
+
+	"crawl_all_of_dialog": false,
 	"max_dialog_count": 20,
-	"max_messages_per_dialog": 100
+
+	"color_map": "Blues_r",
+	"background_color": "black"
 }
