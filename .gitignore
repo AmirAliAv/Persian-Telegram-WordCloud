@@ -74,5 +74,8 @@ __pycache__
 # Environments
 venv/
 
+.DS_Store
 
 test.py
+word_cloud.png
+config.json

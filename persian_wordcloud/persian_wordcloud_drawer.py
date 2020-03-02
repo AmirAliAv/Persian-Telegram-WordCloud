@@ -9,8 +9,6 @@ from wordcloud_fa import WordCloudFa
 
 
 # Params
-BACKGROUND_COLOR = "white"
-COLOR_MAP = "autumn"
 FONT_PATH = "XTitre.TTF"
 MASK_PATH = "mask.png"
 
@@ -18,7 +16,7 @@ STOPWORDS_PATH = "stopwords.dat"
 SAVE_PATH = "word_cloud.png"
 
 
-def draw_word_cloud(sentences):
+def draw_word_cloud(sentences, background_color='black', color_map='Blues_r'):
     # Normalize words
     tokenizer = WordTokenizer()
     lemmatizer = Lemmatizer()
@@ -45,9 +43,9 @@ def draw_word_cloud(sentences):
     clean_string = ' '.join([str(elem) for elem in words])
     clean_string = arabic_reshaper.reshape(clean_string)
     clean_string = get_display(clean_string)
-    word_cloud = WordCloudFa(persian_normalize=False, mask=mask, colormap=COLOR_MAP,
-                             background_color=BACKGROUND_COLOR, include_numbers=False, font_path=FONT_PATH)
+    word_cloud = WordCloudFa(persian_normalize=False, mask=mask, colormap=color_map,
+                             background_color=background_color, include_numbers=False, font_path=FONT_PATH)
     wc = word_cloud.generate(clean_string)
     image = wc.to_image()
     image.show()
-    # image.save(SAVE_PATH) # TODO: uncomment
+    image.save(SAVE_PATH)

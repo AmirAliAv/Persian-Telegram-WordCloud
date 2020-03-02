@@ -4,5 +4,6 @@
 	"phone_number": "<phone_number>",
 	"target_identifier": "<phone_number or username or @username>",
 	"candidate_dialog_names": ["<dialog name>"],
-	"max_dialog_count": 20
+	"max_dialog_count": 20,
+	"max_messages_per_dialog": 100
 }

@@ -330,7 +330,7 @@ tags
 *.sqlite
 *.sqlite3
 *.session
-config.json
+../config.json
 media/*
 groups.csv
 log.txt

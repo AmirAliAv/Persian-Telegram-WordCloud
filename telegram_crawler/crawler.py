@@ -1,24 +1,15 @@
 from telethon import TelegramClient
-from telethon.tl.functions.messages import GetDocumentByHashRequest
 from telethon.tl.types import Dialog, MessageService, MessageMediaDocument, InputMessagesFilterVoice
-from typing import List
-
-from telethon.tl.types import DocumentAttributeAudio
-from telethon.tl.types import Message
-
-import sys, traceback
 import asyncio
-
-# params
-MAX_MSG_COUNT = 200
 
 
 class Crawler:
-    def __init__(self, dialog: Dialog, client: TelegramClient, target_identifier):
+    def __init__(self, dialog: Dialog, client: TelegramClient, target_identifier, max_messages_count):
         super().__init__()
         self.dialog = dialog
         self.client = client
         self.targetId = self.get_user_entity(target_identifier).id
+        self.max_messages_count = max_messages_count
 
     def get_user_entity(self, identifier):
         return asyncio.get_event_loop().run_until_complete(self.client.get_entity(identifier))
@@ -30,7 +21,7 @@ class Crawler:
 
         i = 0
         for message in self.client.iter_messages(self.dialog, limit=None):
-            if i >= MAX_MSG_COUNT:
+            if 0 <= self.max_messages_count <= i:  # if it's lower than zero, continue to the final message
                 break
             i += 1
             if message.message is None or len(message.message) == 0:
