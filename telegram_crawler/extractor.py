@@ -20,9 +20,9 @@ def extract_dialogs(config):
         max_messages_count = -1
     else:
         if len(dialogs_name) == 0:
-            max_messages_count = 1000
+            max_messages_count = 800
         else:
-            max_messages_count = 10000
+            max_messages_count = 4000
 
     dialogs = asyncio.get_event_loop().run_until_complete(get_dialogs(c))
 
