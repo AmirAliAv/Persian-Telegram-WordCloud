@@ -16,7 +16,7 @@ STOPWORDS_PATH = "stopwords.dat"
 SAVE_PATH = "word_cloud.png"
 
 
-def draw_word_cloud(sentences, background_color='black', color_map='Blues_r'):
+def draw_word_cloud(sentences, background_color='black', color_map='Blues_r', ignore_english_characters=True):
     # Normalize words
     tokenizer = WordTokenizer()
     lemmatizer = Lemmatizer()
@@ -25,7 +25,8 @@ def draw_word_cloud(sentences, background_color='black', color_map='Blues_r'):
     words = []
     for sentence in sentences:
         sentence = re.sub(r"[,.;:?!،()]+", " ", sentence)
-        sentence = re.sub('[^\u0600-\u06FF]+', " ", sentence)
+        if ignore_english_characters:
+            sentence = re.sub('[^\u0600-\u06FF]+', " ", sentence)  # remove english characters
         sentence = re.sub(r'[\u200c\s]*\s[\s\u200c]*', " ", sentence)
         sentence = re.sub(r'[\u200c]+', " ", sentence)
         sentence = re.sub(r'[\n]+', " ", sentence)

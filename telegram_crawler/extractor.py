@@ -1,10 +1,15 @@
 from telegram_crawler.crawler import Crawler
 from telegram_crawler.connector import Connector
+from telethon.tl.types import Channel
 import asyncio
 
 
 async def get_dialogs(connector):
     return await connector.client.get_dialogs()
+
+
+def is_channel(dialog):
+    return isinstance(dialog.entity, Channel) and not dialog.entity.megagroup
 
 
 def extract_dialogs(config):
@@ -31,13 +36,17 @@ def extract_dialogs(config):
     print('Number of your dialogs: ' + str(len(dialogs)))
 
     if len(dialogs_name) == 0:
-        n = min(len(dialogs), max_dialog_count)
+        n = min(len(dialogs), max_dialog_count, 1)
 
-        for i in range(n):
-            dialog = dialogs[i]
-            print('dialog {} / {}'.format(i, n))
-            crawler = Crawler(dialog, c.client, target_identifier, max_messages_count)
-            messages.extend(crawler.extract_messages_body())
+        i = 0
+        for dialog in dialogs:
+            if not is_channel(dialog):
+                print('dialog {} / {}'.format(i, n))
+                crawler = Crawler(dialog, c.client, target_identifier, max_messages_count)
+                messages.extend(crawler.extract_messages_body())
+                i += 1
+                if i >= n:
+                    break
 
     else:
         n = len(dialogs)

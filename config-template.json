@@ -8,6 +8,7 @@
 
 	"crawl_all_of_dialog": false,
 	"max_dialog_count": 20,
+	"ignore_english_characters": true,
 
 	"color_map": "Blues_r",
 	"background_color": "black"
