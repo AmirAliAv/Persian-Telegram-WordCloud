@@ -10,6 +10,6 @@
 	"max_dialog_count": 20,
 	"ignore_english_characters": true,
 
-	"color_map": "Blues_r",
+	"color_map": "PuBu",
 	"background_color": "black"
 }

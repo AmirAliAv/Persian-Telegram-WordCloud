@@ -50,11 +50,16 @@ def extract_dialogs(config):
 
     else:
         n = len(dialogs)
+        is_found = False
         for i in range(n):
             dialog = dialogs[i]
             print('dialog {} / {}'.format(i, n))
             if dialog.name in dialogs_name:
+                is_found = True
                 crawler = Crawler(dialog, c.client, target_identifier, max_messages_count)
                 messages.extend(crawler.extract_messages_body())
+
+        if not is_found:
+            raise Exception('None of candidate dialogs were found')
 
     return messages
