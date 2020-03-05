@@ -27,7 +27,7 @@ def draw_word_cloud(sentences, background_color='black', color_map='Blues_r', ig
     stopwords = set(list(map(lambda w: w.strip(), codecs.open(STOPWORDS_PATH, encoding='utf8'))))
     words = []
     for sentence in sentences:
-        sentence = re.sub(r"[,.;:?!،()]+", " ", sentence)
+        sentence = re.sub(r"[,.;:?!،()؟]+", " ", sentence)
         if ignore_english_characters:
             sentence = re.sub('[^\u0600-\u06FF]+', " ", sentence)  # remove english characters
         sentence = re.sub(r'[\u200c\s]*\s[\s\u200c]*', " ", sentence)

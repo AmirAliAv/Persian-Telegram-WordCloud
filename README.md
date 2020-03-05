@@ -96,4 +96,5 @@ or
 - Only a limited number of messages per each dialog are crawled. Set "crawl_all_of_dialog" to true to crawl all of the messages in each dialog. It takes more time.
 - "max_dialog_count" is the number of dialogs that are crawled when the "dialogs_name" array is empty.
 - Set "ignore_english_characters" to false to not ignore the English characters in the messages.
+- Set "ignore_forwarded_messages" to false to not ignore the forwarded messages.
 - To change the color of texts and background of the word cloud use "color_map" and "background_color" parameters.

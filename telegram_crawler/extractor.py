@@ -17,6 +17,7 @@ def extract_dialogs(config):
     dialogs_name = config['dialogs_name']
     max_dialog_count = config['max_dialog_count']
     target_identifier = config['target_identifier']
+    ignore_forwarded_messages = config['ignore_forwarded_messages']
 
     if target_identifier == 'me':
         target_identifier = config['phone_number']
@@ -42,7 +43,7 @@ def extract_dialogs(config):
         for dialog in dialogs:
             if not is_channel(dialog):
                 print('dialog {} / {}'.format(i, n))
-                crawler = Crawler(dialog, c.client, target_identifier, max_messages_count)
+                crawler = Crawler(dialog, c.client, target_identifier, max_messages_count, ignore_forwarded_messages)
                 messages.extend(crawler.extract_messages_body())
                 i += 1
                 if i >= n:
@@ -56,7 +57,7 @@ def extract_dialogs(config):
             print('dialog {} / {}'.format(i, n))
             if dialog.name in dialogs_name:
                 is_found = True
-                crawler = Crawler(dialog, c.client, target_identifier, max_messages_count)
+                crawler = Crawler(dialog, c.client, target_identifier, max_messages_count, ignore_forwarded_messages)
                 messages.extend(crawler.extract_messages_body())
 
         if not is_found:
