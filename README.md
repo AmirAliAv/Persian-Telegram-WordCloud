@@ -54,7 +54,7 @@ First the configuration file is as follows:
 	"crawl_all_of_dialog": false,
 	"max_dialog_count": 20,
 	"ignore_english_characters": true,
-    "ignore_forwarded_messages": true,
+	"ignore_forwarded_messages": true,
 
 	"color_map": "PuBu",
 	"background_color": "black"
