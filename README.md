@@ -6,6 +6,15 @@ You can make the word cloud of the messages of your chat with your friend or a g
 
 Use Python 3.6+.
 
+## Example
+
+The word cloud of the channel `@mamlekate`
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/1997alireza/Persian-Telegram-WordCloud/master/mamlekate.png" alt="" width="75%"/>
+</p>
+
+
 ## Installation
 
 
@@ -45,6 +54,7 @@ First the configuration file is as follows:
 	"crawl_all_of_dialog": false,
 	"max_dialog_count": 20,
 	"ignore_english_characters": true,
+    "ignore_forwarded_messages": true,
 
 	"color_map": "PuBu",
 	"background_color": "black"
