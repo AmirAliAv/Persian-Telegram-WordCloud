@@ -45,7 +45,7 @@ def extract_dialogs(config):
 
     print('Number of your dialogs: ' + str(len(dialogs)))
 
-    if len(dialogs_name) == 0:
+    if len(dialogs_name) == 0 or (len(dialogs_name) == 1 and dialogs_name[0] == ''):
         n = max(min(len(dialogs), max_dialog_count), 1)
 
         i = 0
