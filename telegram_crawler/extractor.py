@@ -39,7 +39,7 @@ def extract_dialogs(config):
         else:
             max_messages_count = 4000
 
-    dialogs = get_dialogs()
+    dialogs = get_dialogs(c.client)
 
     messages = []
 

@@ -54,9 +54,9 @@ def lemmatize(lemmatizer, word):
 
 def draw_word_cloud(sentences, background_color='black', color_map='Blues_r', ignore_english_characters=True,
                     mask_path=MASK_PATH, font_path=FONT_PATH):
-    f = open('temp.txt', 'w', encoding='utf8')
-    before_lem = []
-    after_lem = []
+    # f = open('temp.txt', 'w', encoding='utf8')
+    # before_lem = []
+    # after_lem = []
 
     # Normalize words
     tokenizer = WordTokenizer()
@@ -75,16 +75,16 @@ def draw_word_cloud(sentences, background_color='black', color_map='Blues_r', ig
         sentence = normalizer.normalize(sentence)
         sentence = normalizer.character_refinement(sentence)
         sentence_words = tokenizer.tokenize(sentence)
-        before_lem.extend(sentence_words)
+        # before_lem.extend(sentence_words)
         sentence_words = [lemmatize(lemmatizer, w) for w in sentence_words]
-        after_lem.extend(sentence_words)
+        # after_lem.extend(sentence_words)
         sentence_words = list(filter(lambda x: x not in stopwords, sentence_words))
         words.extend(sentence_words)
     print(words)
 
-    for i in range(len(before_lem)):
-        f.write(before_lem[i] + ', ' + after_lem[i] + '\n')
-    f.close()
+    # for i in range(len(before_lem)):
+    #     f.write(before_lem[i] + ', ' + after_lem[i] + '\n')
+    # f.close()
 
     # Build word_cloud
     mask = np.array(Image.open(mask_path))
