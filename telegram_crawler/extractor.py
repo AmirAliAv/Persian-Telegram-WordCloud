@@ -4,8 +4,12 @@ from telethon.tl.types import Channel
 import asyncio
 
 
-async def get_dialogs(connector):
-    return await connector.client.get_dialogs()
+def get_dialogs(client):
+    return asyncio.get_event_loop().run_until_complete(client.get_dialogs())
+
+
+def get_user_entity(client, identifier):
+    return asyncio.get_event_loop().run_until_complete(client.get_entity(identifier))
 
 
 def is_channel(dialog):
@@ -22,6 +26,11 @@ def extract_dialogs(config):
     if target_identifier == 'me':
         target_identifier = config['phone_number']
 
+    if len(target_identifier) == 0:
+        target_entity_id = -1
+    else:
+        target_entity_id = get_user_entity(c.client, target_identifier).id
+
     if config['crawl_all_of_dialog']:
         max_messages_count = -1
     else:
@@ -30,7 +39,7 @@ def extract_dialogs(config):
         else:
             max_messages_count = 4000
 
-    dialogs = asyncio.get_event_loop().run_until_complete(get_dialogs(c))
+    dialogs = get_dialogs()
 
     messages = []
 
@@ -43,7 +52,7 @@ def extract_dialogs(config):
         for dialog in dialogs:
             if not is_channel(dialog):
                 print('dialog {} / {}'.format(i, n))
-                crawler = Crawler(dialog, c.client, target_identifier, max_messages_count, ignore_forwarded_messages)
+                crawler = Crawler(dialog, c.client, target_entity_id, max_messages_count, ignore_forwarded_messages)
                 messages.extend(crawler.extract_messages_body())
                 i += 1
                 if i >= n:
@@ -57,7 +66,7 @@ def extract_dialogs(config):
             print('dialog {} / {}'.format(i, n))
             if dialog.name in dialogs_name:
                 is_found = True
-                crawler = Crawler(dialog, c.client, target_identifier, max_messages_count, ignore_forwarded_messages)
+                crawler = Crawler(dialog, c.client, target_entity_id, max_messages_count, ignore_forwarded_messages)
                 messages.extend(crawler.extract_messages_body())
 
         if not is_found:

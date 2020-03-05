@@ -1,23 +1,16 @@
 from telethon import TelegramClient
 from telethon.tl.types import Dialog
-import asyncio
 
 
 class Crawler:
-    def __init__(self, dialog: Dialog, client: TelegramClient, target_identifier, max_messages_count,
+    def __init__(self, dialog: Dialog, client: TelegramClient, target_entity_id, max_messages_count,
                  ignore_forwarded_messages):
         super().__init__()
         self.dialog = dialog
         self.client = client
-        if len(target_identifier) == 0:
-            self.targetId = -1
-        else:
-            self.targetId = self.get_user_entity(target_identifier).id
+        self.target_entity_id = target_entity_id
         self.max_messages_count = max_messages_count
         self.ignore_forwarded_messages = ignore_forwarded_messages
-
-    def get_user_entity(self, identifier):
-        return asyncio.get_event_loop().run_until_complete(self.client.get_entity(identifier))
 
     def extract_messages_body(self):
         messages_text = []
@@ -37,7 +30,7 @@ class Crawler:
             fwd_from = message.fwd_from
 
             if not(self.ignore_forwarded_messages and fwd_from is not None):
-                if self.targetId == -1 or from_id == self.targetId:
+                if self.target_entity_id == -1 or from_id == self.target_entity_id:
                     messages_text.append(body)
 
             # if fwd_from is not None:
