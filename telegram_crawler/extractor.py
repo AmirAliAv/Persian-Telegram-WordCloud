@@ -72,4 +72,7 @@ def extract_dialogs(config):
         if not is_found:
             raise Exception('None of candidate dialogs were found')
 
+    if len(messages) == 0:
+        raise Exception('No messages were found with this configuration')
+
     return messages
