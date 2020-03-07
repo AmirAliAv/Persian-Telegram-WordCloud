@@ -83,7 +83,7 @@ or
 ```
 <br>
 
-- If you want to crawl the messages from only one account, fill in "target_identifier" with the account's phone number or ID. If the target is yourself, you can just write "me" instead of your identifier.
+- If you want to crawl messages which are sent from only one account, fill in "target_identifier" with the account's phone number or ID. If the target is yourself, you can just write "me" instead of your identifier.
 <br>If you leave it empty, the messages from all senders will be crawled.
 
 ```json5
